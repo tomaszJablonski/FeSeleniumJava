@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Practice Suite">
+    <parameter name="env" value="env001"></parameter>
+    <parameter name="standard_user" value="secret_sauce"></parameter>
+    <test name="Test 1">
+        <classes>
+            <class name="name"/>
+        </classes>
+    </test>
+
+<!--    <test name="Test Basics 2">-->
+<!--        <parameter name="emailid" value="tester789@gmail.com"/>-->
+<!--        <classes>-->
+<!--            <class name="practiceTests.testOptional"/>-->
+<!--        </classes>-->
+
+<!--    </test> -->
+</suite>
