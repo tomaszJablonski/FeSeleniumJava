@@ -3,8 +3,6 @@ package fe.test.selenium.utils;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.bidi.Connection;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
@@ -12,12 +10,8 @@ import java.time.Duration;
 
 public class Service {
 
-    Connection connection;
-
     @Getter
     public static String environment;
-
-    public static String userRole;
 
     private static final String URL = "https://www.saucedemo.com/";
 
@@ -71,7 +65,7 @@ public class Service {
         }
     }
 
-    public WebDriver init(){
+    public WebDriver init() {
         WebDriverManager.chromedriver().setup();
         System.setProperty("webdriver.chrome.driver", "X:\\NAUKA TESTOWANIA\\FeSeleniumJava\\chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
