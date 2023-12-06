@@ -5,13 +5,12 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 
 import static jdk.internal.net.http.common.Log.logError;
-import static sun.font.FontUtilities.logInfo;
+
 
 public class PageService extends BasePageObject {
 
@@ -21,7 +20,6 @@ public class PageService extends BasePageObject {
 
     Actions actions;
 
-    Select select;
 
     JavascriptExecutor jse;
 
@@ -37,21 +35,37 @@ public class PageService extends BasePageObject {
         jse = (JavascriptExecutor) driver;
     }
 
-    public void clickOnElement(WebElement element) throws Exception {
+    public void clickOnElement(WebElement element){
         logInfo("Click: " + element.toString());
         wait.until(ExpectedConditions.visibilityOf(element));
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
 
-    public void sendKeysToElement(WebElement element, String string) throws Exception {
+    private void logInfo(String s) {
+        System.out.println(s);
+    }
+
+    public void sendKeysToElement(WebElement element, String string) {
         logInfo("I write:" + string + "in element: " + element.toString());
         wait.until(ExpectedConditions.visibilityOf(element));
         element.sendKeys(string);
-        if(string.equals(element.getText()) || string.equals(element.getAttribute("value"))) {
+        if (string.equals(element.getText()) || string.equals(element.getAttribute("value"))) {
             logInfo("Insert true value");
         } else {
             logError("Verify your input");
+        }
+    }
+
+    public boolean isElementVisible(WebElement element) {
+        try {
+            shortWait.until(ExpectedConditions.visibilityOf(element));
+            logInfo("Element is visible = " + element);
+            return true;
+        } catch (Exception e) {
+         logInfo("Element is not visible " + element);
+         e.printStackTrace();
+         return false;
         }
     }
 }

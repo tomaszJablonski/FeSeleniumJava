@@ -4,9 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class LoginPage extends BasePageObject{
+public class LoginPage extends BasePageObject {
 
     PageService pageService;
+
     public LoginPage(WebDriver driver) {
         super(driver);
         pageService = new PageService(driver);
@@ -25,19 +26,34 @@ public class LoginPage extends BasePageObject{
     @FindBy(id = "login-button")
     public static WebElement loginButton;
 
+    @FieldName(name = "Visible site")
+    @FindBy(css = ".header_secondary_container")
+    public static WebElement visibleSite;
+
     //----------methods----------
 
-    public void loginInputFill(String login) throws Exception {
+    public void loginInputFill(String login) {
         pageService.sendKeysToElement(usernameInput, login);
     }
 
-    public void passwordInputFill(String password) throws Exception {
+    public void passwordInputFill(String password) {
         pageService.sendKeysToElement(passwordInput, password);
     }
 
-    public void loginButtonClick() throws Exception {
+    public void loginButtonClick() {
         pageService.clickOnElement(loginButton);
     }
 
+    public void login(String login, String password) throws Exception {
+        loginInputFill(login);
+        passwordInputFill(password);
+        loginButtonClick();
+    }
+
+    //----------visible----------
+
+    public boolean loginPageIsVisible() throws Exception {
+        return pageService.isElementVisible(visibleSite);
+    }
 
 }
